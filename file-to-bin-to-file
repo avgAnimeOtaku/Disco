@@ -1,0 +1,36 @@
+import mimetypes
+
+# Function to convert a file into a binary string
+def file_to_binary_string(filename):
+    with open(filename, "rb") as f:
+        binary_data = f.read()
+
+    binary_string = " ".join(f"{byte:08b}" for byte in binary_data)
+    return binary_string
+
+# Function to convert a binary string back into a file
+def binary_string_to_file(binary_string, filename):
+    binary_data = bytearray(int(byte, 2) for byte in binary_string.split())
+
+    with open(filename, "wb") as f:
+        f.write(binary_data)
+
+# Example usage:
+filename = "main.py"
+
+# Get the MIME type of the file
+content_type = mimetypes.guess_type(filename)[0]
+
+# Convert the file into a binary string
+binary_string = file_to_binary_string(filename)
+
+# Write the binary string to a text file
+with open(f"{filename}.txt", "w") as f:
+    f.write(binary_string)
+
+# Read the binary string from the text file
+with open(f"{filename}.txt", "r") as f:
+    binary_string = f.read()
+
+# Convert the binary string back into a file
+binary_string_to_file(binary_string, f"{filename}_copy{mimetypes.guess_extension(content_type)}")
