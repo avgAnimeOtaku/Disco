@@ -1,2 +1,2 @@
 # Disco
- A storage system for any type of file as a video on YouTube.
+ ## A storage system for any type of file as a video on YouTube.
